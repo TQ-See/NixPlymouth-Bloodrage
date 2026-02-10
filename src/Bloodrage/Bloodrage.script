@@ -30,6 +30,11 @@ Object.align_left = fun(other, margin) {
     this.sprite.SetX(this.x);
 };
 
+Object.align_center = fun(other) {
+    this.x = other.x + (other.w / 2) - (this.w / 2);
+    this.sprite.SetX(this.x);
+};
+
 Object |= fun(image) {
     object = [] | global.Object;
     object.sprite = Sprite(image);
@@ -82,7 +87,13 @@ NUMBER_OF_FRAMES = 60;
 
 logo = Object(Image("0.png"));
 for (i = 0; i < NUMBER_OF_FRAMES; i++)  { logo.frames[i] = Image( i + ".png"); }
-logo.put(20, 20);
+
+// HITUNG POSISI TENAH LAYAR
+logo_x = Window.GetWidth() / 2 - logo.w / 2;
+logo_y = Window.GetHeight() / 2 - logo.h / 2 - 50;
+
+logo.put(logo_x, logo_y);
+
 logo.frame = 0;
 logo.update = fun () {
     this.set_image(global.logo.frames[global.logo.frame]);
@@ -90,6 +101,19 @@ logo.update = fun () {
     this.frame %= NUMBER_OF_FRAMES;
 };
 objstore.add(logo);
+
+// 2. TAMBAHKAN TEKS "WELCOME TO BLOODRAGE"
+// whitetext(teks, ukuran_font)
+welcome_msg = Object(whitetext("Welcome to Bloodrage", 32)); 
+welcome_msg.below(logo, 30); // Jarak 30px di bawah logo
+welcome_msg.x = Window.GetWidth() / 2 - welcome_msg.w / 2; // Tengahkan secara horizontal
+welcome_msg.sprite.SetX(welcome_msg.x);
+
+// 3. SESUAIKAN TEKS STATUS (loading NixOS, dsb)
+label = Object(whitetext(labeltext(), 15));
+label.below(welcome_msg, 10); // Jarak 10px di bawah welcome_msg
+label.x = Window.GetWidth() / 2 - label.w / 2; // Tengahkan secara horizontal
+label.sprite.SetX(label.x);
 
 fun labeltext() {
     mode = Plymouth.GetMode();
@@ -103,8 +127,8 @@ fun labeltext() {
 }
 
 label = Object(whitetext(labeltext(), 20));
-label.below(logo);
-label.align_left(logo);
+label.below(logo, 20);
+label.align_center(logo);
 
 // ========== Question callback
 
