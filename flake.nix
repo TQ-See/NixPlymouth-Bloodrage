@@ -1,5 +1,5 @@
 {
-  description = "Mac-style NixOS Plymouth Theme";
+  description = "Bloodrage NixOS Plymouth Theme";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs";
@@ -14,7 +14,7 @@
     in {
       packages = {
         default = pkgs.callPackage ./package.nix {};
-        mac-style-plymouth = pkgs.callPackage ./package.nix {};
+        Bloodrage-plymouth = pkgs.callPackage ./package.nix {};
       };
 
       devShells.default = pkgs.mkShell {
@@ -27,7 +27,7 @@
     })
     // {
       overlays.default = final: prev: {
-        mac-style-plymouth = final.callPackage ./package.nix {};
+        Bloodrage-plymouth = final.callPackage ./package.nix {};
       };
     };
 }
