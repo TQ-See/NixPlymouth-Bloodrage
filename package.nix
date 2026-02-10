@@ -1,9 +1,7 @@
-{}:
-
 { stdenvNoCC, pkgs ? import <nixpkgs> { }
-, theme="Bloodrage"
+, theme ? "Bloodrage"
 , # TODO: Should be a list when more themes come
-  bgColor="0, 0, 0"
+  bgColor ? "0, 0, 0"
 , # rgb value between 0-1. TODO: Write hex to plymouth magic
 }:
 
@@ -12,9 +10,12 @@ stdenvNoCC.mkDerivation {
   version = "0.1.0";
   src = ./src;
   
+  buildInputs = [
+    pkgs.git
+  ];
+  
   unpackPhase = ''
   '';
-  
 
   buildPhase = ''
     # Create theme
