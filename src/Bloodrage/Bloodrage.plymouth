@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=Bloodrage
+Description=weird evil nixos theme
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/Bloodrage
+ScriptFile=/usr/share/plymouth/themes/Bloodrage/Bloodrage.script
