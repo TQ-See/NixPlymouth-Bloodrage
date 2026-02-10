@@ -6,15 +6,16 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { nixpkgs, flake-utils, ... }:
-    with flake-utils.lib; eachDefaultSystem (system: let
-      pkgs = import nixpkgs {
-        inherit system;
-      };
+  outputs = { self, nixpkgs, flake-utils, ... }:
+    flake-utils.lib.eachDefaultSystem (system: let
+      pkgs = import nixpkgs { inherit system; };
     in {
-      packages = {
-        default = pkgs.callPackage ./package.nix {};
-        Bloodrage-plymouth = pkgs.callPackage ./package.nix {};
+      packages = rec {
+        Bloodrage-plymouth = pkgs.callPackage ./package.nix {
+          theme = "Bloodrage";
+          bgColor = "0, 0, 0"; # Sesuaikan jika ingin warna lain
+        };
+        default = Bloodrage-plymouth;
       };
 
       devShells.default = pkgs.mkShell {
@@ -24,10 +25,10 @@
           (pkgs.writeShellScriptBin "show" (builtins.readFile ./show-splash.sh))
         ];
       };
-    })
-    // {
+    }) // {
+      # Overlay agar bisa dipakai di configuration.nix dengan mudah
       overlays.default = final: prev: {
-        Bloodrage-plymouth = final.callPackage ./package.nix {};
+        Bloodrage-plymouth = final.callPackage ./package.nix { };
       };
     };
 }
