@@ -62,10 +62,10 @@ fun whitetext(text, size) {
 // ========== Fungsi Label (Ditaruh di atas agar bisa dipanggil)
 fun get_status_text() {
     mode = Plymouth.GetMode();
-    if (mode == "boot") return "loading NixOS...";
-    if (mode == "shutdown") return "shutting down...";
-    if (mode == "reboot") return "reboot initiated...";
-    if (mode == "updates") return "system update in progress...";
+    if (mode == "boot") return "Loading NixOS...";
+    if (mode == "shutdown") return "Shutting Down...";
+    if (mode == "reboot") return "Reboot initiated...";
+    if (mode == "updates") return "System Update in progress...";
     return "processing...";
 }
 
