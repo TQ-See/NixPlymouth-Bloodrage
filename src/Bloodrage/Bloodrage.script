@@ -77,7 +77,7 @@ for (i = 0; i < NUMBER_OF_FRAMES; i++) { logo.frames[i] = Image(i + ".png"); }
 // PENGATUR KECEPATAN (Slow down)
 logo.frame = 0;
 logo.counter = 0;
-logo.speed_divider = 3; // NAIKKAN angka ini jika masih terlalu cepat (misal: 4 atau 5)
+logo.speed_divider = 2; // NAIKKAN angka ini jika masih terlalu cepat (misal: 4 atau 5)
 
 logo.update = fun () {
     this.counter++;
